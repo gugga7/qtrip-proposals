@@ -73,63 +73,63 @@ export interface NicheConfig {
   defaultGroupSize: number;
 }
 
-/* ── Bachelor / Bachelorette niche ── */
+/* ── Romantic Proposals niche ── */
 
-export const bachelorConfig: NicheConfig = {
-  id: 'bachelor',
+export const proposalsConfig: NicheConfig = {
+  id: 'proposals',
   name: {
-    en: 'Bachelor & Bachelorette',
-    fr: 'Enterrement de Vie de Garçon/Fille',
+    en: 'Romantic Proposals',
+    fr: 'Demandes en Mariage',
   },
-  destinations: ['marrakech', 'marbella', 'faro'],
+  destinations: ['essaouira', 'marrakech'],
   features: {
-    groupBooking: true,
-    votingSystem: true,
+    groupBooking: false,
+    votingSystem: false,
     countdownTimer: true,
-    expenseSplitting: true,
-    guestList: true,
+    expenseSplitting: false,
+    guestList: false,
     profilePage: true,
     aiSchedule: true,
   },
   theme: {
-    primary: 'pink',
-    accent: 'rose',
-    heroGradient: 'from-pink-500 via-rose-500 to-fuchsia-500',
-    ctaGradient: 'from-pink-500 to-rose-500',
+    primary: 'rose',
+    accent: 'pink',
+    heroGradient: 'from-rose-400 via-pink-500 to-fuchsia-500',
+    ctaGradient: 'from-rose-400 to-pink-500',
     appName: 'QTRIP',
     tagline: {
-      en: 'Plan the ultimate celebration',
-      fr: 'Organisez la fête parfaite',
+      en: 'The perfect moment, perfectly planned',
+      fr: 'Le moment parfait, parfaitement organisé',
     },
     description: {
-      en: 'Plan unforgettable bachelor & bachelorette trips to Marrakech, Marbella, and the Algarve.',
-      fr: 'Organisez des enterrements de vie de garçon et de jeune fille inoubliables à Marrakech, Marbella et en Algarve.',
+      en: 'Plan the perfect romantic proposal in Essaouira or Marrakech. Sunset moments, intimate dinners, and unforgettable experiences.',
+      fr: 'Organisez la demande en mariage parfaite à Essaouira ou Marrakech. Couchers de soleil, dîners intimes et expériences inoubliables.',
     },
   },
   categories: [
-    'Party & Nightlife',
-    'Adventure & Outdoor',
-    'Wellness & Relaxation',
-    'Food & Drink',
-    'Culture & Sightseeing',
-    'Group Experiences',
+    'Romantic Experiences',
+    'Culture & Discovery',
+    'Adventure & Active',
+    'Food & Wine',
+    'Wellness & Spa',
+    'Photography',
   ],
   categoryColors: {
-    'Party & Nightlife':     { bg: 'bg-fuchsia-50',  border: 'border-fuchsia-300', text: 'text-fuchsia-700', badge: 'bg-fuchsia-100 text-fuchsia-700', dot: 'bg-fuchsia-400', light: 'bg-fuchsia-50/60' },
-    'Adventure & Outdoor':   { bg: 'bg-orange-50',   border: 'border-orange-300',  text: 'text-orange-700',  badge: 'bg-orange-100 text-orange-700',   dot: 'bg-orange-400',  light: 'bg-orange-50/60' },
-    'Wellness & Relaxation': { bg: 'bg-teal-50',     border: 'border-teal-300',    text: 'text-teal-700',    badge: 'bg-teal-100 text-teal-700',       dot: 'bg-teal-400',    light: 'bg-teal-50/60' },
-    'Food & Drink':          { bg: 'bg-rose-50',     border: 'border-rose-300',    text: 'text-rose-700',    badge: 'bg-rose-100 text-rose-700',       dot: 'bg-rose-400',    light: 'bg-rose-50/60' },
-    'Culture & Sightseeing': { bg: 'bg-amber-50',    border: 'border-amber-300',   text: 'text-amber-700',   badge: 'bg-amber-100 text-amber-700',     dot: 'bg-amber-400',   light: 'bg-amber-50/60' },
-    'Group Experiences':     { bg: 'bg-violet-50',   border: 'border-violet-300',  text: 'text-violet-700',  badge: 'bg-violet-100 text-violet-700',   dot: 'bg-violet-400',  light: 'bg-violet-50/60' },
+    'Romantic Experiences': { bg: 'bg-rose-50',   border: 'border-rose-300',   text: 'text-rose-700',   badge: 'bg-rose-100 text-rose-700',     dot: 'bg-rose-400',   light: 'bg-rose-50/60' },
+    'Culture & Discovery': { bg: 'bg-violet-50', border: 'border-violet-300', text: 'text-violet-700', badge: 'bg-violet-100 text-violet-700', dot: 'bg-violet-400', light: 'bg-violet-50/60' },
+    'Adventure & Active':  { bg: 'bg-sky-50',    border: 'border-sky-300',    text: 'text-sky-700',    badge: 'bg-sky-100 text-sky-700',       dot: 'bg-sky-400',    light: 'bg-sky-50/60' },
+    'Food & Wine':         { bg: 'bg-amber-50',  border: 'border-amber-300',  text: 'text-amber-700',  badge: 'bg-amber-100 text-amber-700',   dot: 'bg-amber-400',  light: 'bg-amber-50/60' },
+    'Wellness & Spa':      { bg: 'bg-teal-50',   border: 'border-teal-300',   text: 'text-teal-700',   badge: 'bg-teal-100 text-teal-700',     dot: 'bg-teal-400',   light: 'bg-teal-50/60' },
+    'Photography':         { bg: 'bg-pink-50',   border: 'border-pink-300',   text: 'text-pink-700',   badge: 'bg-pink-100 text-pink-700',     dot: 'bg-pink-400',   light: 'bg-pink-50/60' },
   },
   defaultCurrency: 'EUR',
   supportedLanguages: ['en', 'fr'],
   defaultLanguage: 'en',
-  minGroupSize: 4,
-  defaultGroupSize: 8,
+  minGroupSize: 2,
+  defaultGroupSize: 2,
 };
 
 /* ── Active niche ── */
 // Change this to switch niches. In the future this could come from
 // an env variable, subdomain detection, or a database lookup.
-export const activeNiche: NicheConfig = bachelorConfig;
+export const activeNiche: NicheConfig = proposalsConfig;
