@@ -10,6 +10,8 @@
     "accommodation": "Hébergement",
     "schedule": "Planning",
     "review": "Récapitulatif",
+    "moment": "Le Moment",
+    "experiences": "Expériences",
     "profile": "Profil",
     "signOut": "Se déconnecter",
     "signIn": "Se connecter",
@@ -389,5 +391,22 @@
     "message": "La page que vous cherchez n'existe pas ou a été déplacée.",
     "goBack": "Retour",
     "goHome": "Retour à l'accueil"
+  },
+  "proposals": {
+    "vibesTitle": "Quel type de demande ?",
+    "showIdeas": "Voir les idées de demande",
+    "validationVibes": "Sélectionnez au moins un style de demande.",
+    "momentTitle": "Choisissez votre moment",
+    "momentSubtitle": "Scénarios de demande sélectionnés pour {{destination}}. Choisissez celui qui vous correspond.",
+    "chooseThis": "Choisir ce moment",
+    "addPhotographer": "Ajouter un photographe",
+    "included": "Inclus",
+    "experiencesTitle": "Autour du voyage",
+    "experiencesSubtitle": "Rendez les jours autour de la demande inoubliables.",
+    "beforeProposal": "Avant la demande",
+    "afterProposal": "Après la demande",
+    "continueToMoment": "Continuer",
+    "continueToExperiences": "Continuer",
+    "continueToBook": "Continuer vers la réservation"
   }
 }

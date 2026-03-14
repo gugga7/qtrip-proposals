@@ -10,6 +10,8 @@
     "accommodation": "Accommodation",
     "schedule": "Schedule",
     "review": "Review",
+    "moment": "The Moment",
+    "experiences": "Experiences",
     "profile": "Profile",
     "signOut": "Sign out",
     "signIn": "Sign in",
@@ -389,5 +391,22 @@
     "message": "The page you're looking for doesn't exist or has been moved.",
     "goBack": "Go back",
     "goHome": "Back to home"
+  },
+  "proposals": {
+    "vibesTitle": "What kind of proposal?",
+    "showIdeas": "Show me proposal ideas",
+    "validationVibes": "Select at least one proposal style.",
+    "momentTitle": "Choose Your Moment",
+    "momentSubtitle": "Curated proposal scenarios for {{destination}}. Pick the one that feels right.",
+    "chooseThis": "Choose this moment",
+    "addPhotographer": "Add photographer",
+    "included": "Included",
+    "experiencesTitle": "Around the Trip",
+    "experiencesSubtitle": "Make the days around the proposal unforgettable.",
+    "beforeProposal": "Before the Proposal",
+    "afterProposal": "After the Proposal",
+    "continueToMoment": "Continue",
+    "continueToExperiences": "Continue",
+    "continueToBook": "Continue to book"
   }
 }

@@ -1,4 +1,4 @@
-import { Calendar, CheckCircle2, Hotel, Mail, MapPin, Phone, Plane, Send, Ticket, UserRound } from 'lucide-react';
+import { Calendar, CheckCircle2, Mail, MapPin, Phone, Send, Ticket, UserRound } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -35,15 +35,13 @@ export function ReviewBook({ onBack }: ReviewBookProps) {
     if (!selectedDestination) messages.push(t('review.validationDestination'));
     if (!startDate || !endDate) messages.push(t('review.validationDates'));
     if (!selectedActivities.length) messages.push(t('review.validationActivities'));
-    if (!selectedAccommodation) messages.push(t('review.validationAccommodation'));
-    if (!selectedTransport) messages.push(t('review.validationTransport'));
     if (!form.fullName.trim()) messages.push(t('review.validationName'));
     if (!form.email.trim()) messages.push(t('review.validationEmail'));
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) messages.push(t('review.validationEmailFormat'));
     if (!form.phone.trim()) messages.push(t('review.validationPhone'));
     else if (!/^\+?[\d\s()-]{7,}$/.test(form.phone.trim())) messages.push(t('review.validationPhoneFormat'));
     return messages;
-  }, [endDate, form.email, form.fullName, form.phone, selectedAccommodation, selectedActivities.length, selectedDestination, selectedTransport, startDate, t]);
+  }, [endDate, form.email, form.fullName, form.phone, selectedActivities.length, selectedDestination, startDate, t]);
 
   const handleSubmit = async () => {
     if (!selectedDestination) return;
@@ -176,25 +174,6 @@ export function ReviewBook({ onBack }: ReviewBookProps) {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-slate-200 p-4">
-              <div className="mb-2 flex items-center gap-2 text-slate-900">
-                <Hotel size={16} className={tc.textPrimaryMid} />
-                <h2 className="text-sm font-semibold">{t('review.accommodation')}</h2>
-              </div>
-              <p className="text-sm font-medium text-slate-900">{selectedAccommodation?.name ?? '—'}</p>
-              <p className="text-xs text-slate-500">{selectedAccommodation ? t('review.accommodationDetails', { location: selectedAccommodation.location, price: selectedAccommodation.pricePerNight }) : t('review.noStay')}</p>
-            </div>
-            <div className="rounded-xl border border-slate-200 p-4">
-              <div className="mb-2 flex items-center gap-2 text-slate-900">
-                <Plane size={16} className={tc.textPrimaryMid} />
-                <h2 className="text-sm font-semibold">{t('review.transport')}</h2>
-              </div>
-              <p className="text-sm font-medium text-slate-900">{selectedTransport?.name ?? '—'}</p>
-              <p className="text-xs text-slate-500">{selectedTransport ? t('review.transportDetails', { type: selectedTransport.type, price: selectedTransport.price }) : t('review.noTransport')}</p>
-            </div>
-          </div>
-
           {selectedDestination && (
             <div className="rounded-xl bg-slate-900 p-4 text-white">
               <p className={`text-xs uppercase tracking-[0.2em] ${tc.insightsLabel}`}>{t('review.destinationGuide')}</p>
@@ -287,7 +266,7 @@ export function ReviewBook({ onBack }: ReviewBookProps) {
             </label>
             <label className="block space-y-1">
               <span className="text-xs font-medium text-slate-600">{t('review.notes')}</span>
-              <textarea value={form.notes} onChange={(e) => setForm((prev) => ({ ...prev, notes: e.target.value }))} rows={4} placeholder={t('review.notesPlaceholder')} className={`w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm focus:outline-none ${tc.focusInput}`} />
+              <textarea value={form.notes} onChange={(e) => setForm((prev) => ({ ...prev, notes: e.target.value }))} rows={4} placeholder="Ring details, photographer preferences, music requests, partner's name, any surprises to coordinate" className={`w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm focus:outline-none ${tc.focusInput}`} />
             </label>
           </div>
 

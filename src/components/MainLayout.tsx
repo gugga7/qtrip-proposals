@@ -7,12 +7,10 @@ import { TripSummary } from './TripSummary';
 import { GroupDashboard } from './GroupDashboard';
 
 const steps = [
-  { id: 1, title: 'Preferences', path: 'preferences' },
-  { id: 2, title: 'Activities', path: 'activities' },
-  { id: 3, title: 'Transport', path: 'transport' },
-  { id: 4, title: 'Accommodation', path: 'accommodation' },
-  { id: 5, title: 'Schedule', path: 'schedule' },
-  { id: 6, title: 'Review & Quote', path: 'review' },
+  { id: 1, title: 'Your Story', path: 'preferences' },
+  { id: 2, title: 'The Moment', path: 'moment' },
+  { id: 3, title: 'Experiences', path: 'experiences' },
+  { id: 4, title: 'Book', path: 'review' },
 ];
 
 export function MainLayout() {

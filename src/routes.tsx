@@ -6,10 +6,8 @@ import { AdminRoute } from './components/AdminRoute';
 
 // Eager-loaded: wizard step pages + MainLayout (critical path)
 import { Preferences } from './pages/Preferences';
-import { Activities } from './pages/Activities';
-import { Transport } from './pages/Transport';
-import { Accommodation } from './pages/Accommodation';
-import { Schedule } from './pages/Schedule';
+import { ProposalMoment } from './pages/ProposalMoment';
+import { ProposalExperiences } from './pages/ProposalExperiences';
 import { ReviewBook } from './pages/ReviewBook';
 import { MainLayout } from './components/MainLayout';
 
@@ -81,62 +79,40 @@ export const routes = [
         element: (() => {
           const PreferencesStep = () => {
             const navigate = useNavigate();
-            return <Preferences onNext={() => navigate('/activities')} onBack={() => navigate('/home')} />;
+            return <Preferences onNext={() => navigate('/moment')} onBack={() => navigate('/home')} />;
           };
           return <PreferencesStep />;
         })(),
         label: 'Preferences'
       },
       {
-        path: 'activities',
+        path: 'moment',
         element: (() => {
-          const ActivitiesStep = () => {
+          const MomentStep = () => {
             const navigate = useNavigate();
-            return <Activities onNext={() => navigate('/transport')} onBack={() => navigate('/preferences')} />;
+            return <ProposalMoment onNext={() => navigate('/experiences')} onBack={() => navigate('/preferences')} />;
           };
-          return <ActivitiesStep />;
+          return <MomentStep />;
         })(),
-        label: 'Activities'
+        label: 'The Moment'
       },
       {
-        path: 'transport',
+        path: 'experiences',
         element: (() => {
-          const TransportStep = () => {
+          const ExperiencesStep = () => {
             const navigate = useNavigate();
-            return <Transport onNext={() => navigate('/accommodation')} onBack={() => navigate('/activities')} />;
+            return <ProposalExperiences onNext={() => navigate('/review')} onBack={() => navigate('/moment')} />;
           };
-          return <TransportStep />;
+          return <ExperiencesStep />;
         })(),
-        label: 'Transport'
-      },
-      {
-        path: 'accommodation',
-        element: (() => {
-          const AccommodationStep = () => {
-            const navigate = useNavigate();
-            return <Accommodation onNext={() => navigate('/schedule')} onBack={() => navigate('/transport')} />;
-          };
-          return <AccommodationStep />;
-        })(),
-        label: 'Accommodation'
-      },
-      {
-        path: 'schedule',
-        element: (() => {
-          const ScheduleStep = () => {
-            const navigate = useNavigate();
-            return <Schedule onNext={() => navigate('/review')} onBack={() => navigate('/accommodation')} />;
-          };
-          return <ScheduleStep />;
-        })(),
-        label: 'Schedule'
+        label: 'Experiences'
       },
       {
         path: 'review',
         element: (() => {
           const ReviewStep = () => {
             const navigate = useNavigate();
-            return <ReviewBook onNext={() => navigate('/')} onBack={() => navigate('/schedule')} />;
+            return <ReviewBook onNext={() => navigate('/')} onBack={() => navigate('/experiences')} />;
           };
           return <ReviewStep />;
         })(),

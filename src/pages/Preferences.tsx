@@ -13,17 +13,39 @@ interface PreferencesProps {
   onBack: () => void;
 }
 
+const PROPOSAL_VIBES = [
+  { label: 'Romantic Sunset', value: 'romantic-sunset', emoji: '\u{1F305}' },
+  { label: 'Adventure Surprise', value: 'adventure', emoji: '\u{1F388}' },
+  { label: 'Intimate & Private', value: 'intimate', emoji: '\u{1F56F}\u{FE0F}' },
+  { label: 'Cultural & Unique', value: 'cultural', emoji: '\u{1F3DB}\u{FE0F}' },
+  { label: 'Luxury & Glamour', value: 'luxury', emoji: '\u{1F48E}' },
+  { label: 'Nature & Scenic', value: 'nature', emoji: '\u{1F33F}' },
+];
+
 export function Preferences({ onNext, onBack }: PreferencesProps) {
   const { t } = useTranslation();
-  const { selectedDestination, startDate, endDate, travelers, budget, currency, setDestination, setDates, setTravelers, setBudget, setCurrency } = useTripStore();
+  const { selectedDestination, startDate, endDate, budget, currency, vibePreferences, setDestination, setDates, setBudget, setCurrency, setVibePreferences, setTravelers } = useTripStore();
   const { destinations, loading } = useDestinations();
+
+  // Force travelers to 2 for proposals
+  useMemo(() => { setTravelers(2); }, []);
+
+  const toggleVibe = (value: string) => {
+    if (vibePreferences.includes(value)) {
+      setVibePreferences(vibePreferences.filter((v) => v !== value));
+    } else {
+      setVibePreferences([...vibePreferences, value]);
+    }
+  };
+
   const validationMessages = useMemo(() => {
     const messages: string[] = [];
     if (!selectedDestination) messages.push(t('preferences.validationDestination'));
     if (!startDate || !endDate) messages.push(t('preferences.validationDates'));
     if (startDate && endDate && new Date(endDate) <= new Date(startDate)) messages.push(t('preferences.validationDatesOrder'));
+    if (vibePreferences.length === 0) messages.push(t('proposals.validationVibes'));
     return messages;
-  }, [endDate, selectedDestination, startDate]);
+  }, [endDate, selectedDestination, startDate, vibePreferences.length]);
 
   return (
     <div className="space-y-6 pb-28">
@@ -41,7 +63,7 @@ export function Preferences({ onNext, onBack }: PreferencesProps) {
               </p>
             </div>
 
-            {/* ── Inline controls: dates, travelers, budget ── */}
+            {/* Inline controls: dates, travelers (static), budget */}
             <div className="space-y-3">
               {/* Date range */}
               <div className="relative">
@@ -52,26 +74,12 @@ export function Preferences({ onNext, onBack }: PreferencesProps) {
                 />
               </div>
 
-              {/* Travelers + Budget row */}
+              {/* Travelers (static) + Budget row */}
               <div className="grid grid-cols-2 gap-3">
-                {/* Travelers */}
+                {/* Travelers — fixed at 2 */}
                 <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-white/15 bg-white/10 px-4 py-4 backdrop-blur-sm">
                   <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/50">{t('common.travelers')}</span>
-                  <div className="mt-2 flex items-center gap-4">
-                    <button
-                      onClick={() => setTravelers(Math.max(1, travelers - 1))}
-                      className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-lg font-bold text-white shadow-sm transition-all hover:bg-white/25 hover:shadow-md active:scale-90"
-                    >
-                      −
-                    </button>
-                    <span className="min-w-[2ch] text-center text-3xl font-extrabold tabular-nums">{travelers}</span>
-                    <button
-                      onClick={() => setTravelers(travelers + 1)}
-                      className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-lg font-bold text-white shadow-sm transition-all hover:bg-white/25 hover:shadow-md active:scale-90"
-                    >
-                      +
-                    </button>
-                  </div>
+                  <span className="mt-2 text-3xl font-extrabold tabular-nums">2</span>
                 </div>
 
                 {/* Budget */}
@@ -126,6 +134,30 @@ export function Preferences({ onNext, onBack }: PreferencesProps) {
         </div>
       </section>
 
+      {/* Proposal Vibes */}
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+        <h2 className="text-xl font-semibold text-slate-900">{t('proposals.vibesTitle')}</h2>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {PROPOSAL_VIBES.map((vibe) => {
+            const isActive = vibePreferences.includes(vibe.value);
+            return (
+              <button
+                key={vibe.value}
+                onClick={() => toggleVibe(vibe.value)}
+                className={`flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium backdrop-blur-sm transition-all ${
+                  isActive
+                    ? `bg-gradient-to-r ${tc.ctaGradient} text-white shadow-md`
+                    : 'border border-slate-200 bg-white/80 text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                }`}
+              >
+                <span>{vibe.emoji}</span>
+                <span>{vibe.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
       {/* Destinations */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
         <h2 className="text-xl font-semibold text-slate-900">{t('preferences.chooseDestination')}</h2>
@@ -171,7 +203,7 @@ export function Preferences({ onNext, onBack }: PreferencesProps) {
         )}
       </section>
 
-      {/* Destination insights — only when selected */}
+      {/* Destination insights */}
       {selectedDestination && (
         <section className="rounded-2xl bg-slate-900 p-5 text-white shadow-sm">
           <p className={`text-xs uppercase tracking-[0.2em] ${tc.textPrimaryPale}`}>{t('preferences.destinationInsights')}</p>
@@ -184,7 +216,7 @@ export function Preferences({ onNext, onBack }: PreferencesProps) {
         </section>
       )}
 
-      <FloatingContinueButton onContinue={onNext} onBack={onBack} isValid={validationMessages.length === 0} currentStep={1} totalSteps={6} validationMessages={validationMessages} nextText={t('preferences.continueToActivities')} />
+      <FloatingContinueButton onContinue={onNext} onBack={onBack} isValid={validationMessages.length === 0} currentStep={1} totalSteps={4} validationMessages={validationMessages} nextText={t('proposals.showIdeas')} />
     </div>
   );
 }
